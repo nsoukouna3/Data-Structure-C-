@@ -119,6 +119,88 @@ class LinkedList{
 
         }
 
+        void deleteFirst(){
+            if(head==nullptr){
+                return;
+            }
+            Node* currentNode= head;
+            if(Length==1){
+                head=nullptr;
+                tail=nullptr;
+            }
+            else{
+                head= head->next;   
+            }
+            delete currentNode;
+            Length-=1;
+
+        }
+        int get(int index){
+            if(index<0 || index>= Length){
+                return -1;
+            }
+            Node* currentNode=head;
+            if(index==0){
+                return head->value;
+            }
+            else{
+                for(int i=1; i<index;i++){
+                    currentNode=currentNode->next;
+                }
+                return currentNode->value;
+            }
+
+        }
+
+        bool set(int index, int value){
+            Node* newNode= new Node(value);
+            if(index<0 || index>Length){return false;}
+            if(head==nullptr){
+                head= newNode;
+                tail=newNode;
+                return true;
+            }
+            if(index==0){
+                head->value= newNode->value;
+                return true;
+            }
+            else{
+                Node* currentNode= head;
+                for(int i=0; i<index; i++){
+                    currentNode=currentNode->next;
+                }
+                currentNode->value= newNode->value;
+                return true;
+            }
+            
+
+        }
+        bool insert(int index, int value){
+            Node* newNode= new Node(value);
+            if(index<0||index>=Length){return false;}
+            Node* currentNode= head;
+            Node*prev=nullptr;
+            if(index==0){
+                newNode->next=head;
+                head=newNode;
+            }
+            else if(index==Length){
+                tail->next= newNode;
+                tail= newNode;
+            }
+            else{
+                for(int i=0; i<index; i++){
+                    currentNode= currentNode->next;
+                }
+                newNode->next=currentNode->next;
+                currentNode->next=newNode;
+                
+            }
+            Length+=1;
+            return true;
+
+        }
+
     };
 
 int main(){
@@ -127,14 +209,19 @@ int main(){
 
     myLinkedlist->Append(4);
     myLinkedlist->Append(5);
-    myLinkedlist->Append(6);
-    myLinkedlist->Append(7);
-    myLinkedlist ->Prepend(2);
-    myLinkedlist->deleteLast();
+    //myLinkedlist->Append(6);
+    //myLinkedlist->Append(7);
+    //myLinkedlist ->Prepend(2);
+    //myLinkedlist -> deleteLast();
+   // myLinkedlist->deleteFirst();
+   myLinkedlist-> set(0,9);
+   myLinkedlist->insert(2,1);
     myLinkedlist-> printing();
     myLinkedlist->getHead();
     myLinkedlist ->getTail();
     myLinkedlist->getLength();
+    
+    cout<<"Index value = "<<myLinkedlist->get(0)<<endl;
    
     return 0;
 }  
