@@ -200,6 +200,42 @@ class LinkedList{
             return true;
 
         }
+        bool deleteNode(int index){
+            if(index>=Length|| index<0){return false;}
+            Node*currentNode= head;
+            Node*prev=nullptr;
+            if(index==0){
+                head=head->next;
+            }
+            else{
+                for(int i=0; i<index; i++){
+                    prev= currentNode;
+                    currentNode= currentNode->next;
+                }
+                prev->next= currentNode->next;
+                
+            }
+            delete currentNode;
+            Length-=1;
+            return true;
+            
+        }
+
+        void reverse(){
+            Node*currentNode=head;
+            head=tail;
+            tail=currentNode;
+            Node* after= currentNode->next;
+            Node* before=nullptr;
+            while (currentNode){
+               after= currentNode->next;
+               currentNode->next=before;
+               before=currentNode;
+               currentNode=after;
+
+            }
+
+        }
 
     };
 
@@ -209,16 +245,18 @@ int main(){
 
     myLinkedlist->Append(4);
     myLinkedlist->Append(5);
-    //myLinkedlist->Append(6);
-    //myLinkedlist->Append(7);
+    myLinkedlist->Append(6);
+    myLinkedlist->Append(7);
+    myLinkedlist->reverse();
     //myLinkedlist ->Prepend(2);
     //myLinkedlist -> deleteLast();
    // myLinkedlist->deleteFirst();
-   myLinkedlist-> set(0,9);
-   myLinkedlist->insert(2,1);
+    //myLinkedlist-> set(0,9);
+   // myLinkedlist->insert(2,1);
+    //myLinkedlist->deleteNode(3);
     myLinkedlist-> printing();
-    myLinkedlist->getHead();
-    myLinkedlist ->getTail();
+    //myLinkedlist->getHead();
+    //myLinkedlist ->getTail();
     myLinkedlist->getLength();
     
     cout<<"Index value = "<<myLinkedlist->get(0)<<endl;
